@@ -45,3 +45,14 @@ dolphin.hook_frame(function ()
     print("frame " .. frame_count)
   end
 end)
+
+-- EFB frame dumping
+x_steps = 0
+dolphin.hook_instruction(0x8006910c, function ()
+  x_steps = x_steps + 1
+  print("Dumping EFB")
+  x = dolphin.dump_efb()
+  file = io.open(string.format("efbtest-%06d", x_steps), "w")
+  file:write(x)
+  io.close(file)
+end)
