@@ -71,6 +71,11 @@ public:
   // Wrapper function which pushes the event to the GPU thread.
   void DoState(PointerWrap& p);
 
+  // Hacky function to export the EFB in XFB (YUYV/422) format.
+  // TODO Export RGB instead of XFB
+  // TODO Add width/height parameters
+  static std::vector<u8> DumpEFB();
+
 protected:
   void InitializeShared();
   void ShutdownShared();

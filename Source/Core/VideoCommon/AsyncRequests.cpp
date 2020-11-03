@@ -165,6 +165,10 @@ void AsyncRequests::HandleEvent(const AsyncRequests::Event& e)
   case Event::DO_SAVE_STATE:
     VideoCommon_DoState(*e.do_save_state.p);
     break;
+
+  case Event::DUMP_EFB:
+    *e.efb_dump.data = g_texture_cache->DumpEFB();
+    break;
   }
 }
 

@@ -12,6 +12,7 @@
 #include <unordered_map>
 #include <vector>
 
+#include <VideoCommon/VideoBackendBase.h>
 #include <cassert>
 #include <lua5.3/lua.hpp>
 
@@ -788,6 +789,13 @@ static int ppc_set(lua_State* L)
   return 0;
 }
 
+static int dump_efb(lua_State* L)
+{
+  std::vector<u8> efb = VideoBackendBase::DumpEFB();
+  lua_pushlstring(L, reinterpret_cast<const char*>(efb.data()), efb.size());
+  return 1;
+}
+
 // Sets a custom getter and setter to the table or userdata on the top of the stack.
 static void new_getset_metatable(lua_State* L, lua_CFunction get, lua_CFunction set)
 {
@@ -848,6 +856,8 @@ static void init(lua_State* L)
   DOLPHIN_LUA_METHOD(mem_write);
   DOLPHIN_LUA_METHOD(str_read);
   DOLPHIN_LUA_METHOD(str_write);
+  // Video
+  DOLPHIN_LUA_METHOD(dump_efb);
 #undef DOLPHIN_LUA_METHOD
 
   // ppc object

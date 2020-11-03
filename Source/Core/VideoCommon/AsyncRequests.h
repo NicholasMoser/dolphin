@@ -30,6 +30,7 @@ public:
       BBOX_READ,
       PERF_QUERY,
       DO_SAVE_STATE,
+      DUMP_EFB,
     } type;
     u64 time;
 
@@ -71,6 +72,11 @@ public:
       {
         PointerWrap* p;
       } do_save_state;
+
+      struct
+      {
+        std::vector<u8>* data;
+      } efb_dump;
     };
   };
 

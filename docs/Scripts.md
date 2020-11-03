@@ -120,3 +120,16 @@ Installs a Lua function to run on every frame.
 
 Uninstalls a previously installed Lua frame hook.
 Takes the same arguments as `hook_frame`.
+
+### Graphics
+
+#### Framebuffers
+
+##### `dump_efb`
+
+Flushes the graphics pipeline and dumps the current EFB in XFB format (YUYV422).
+The exported array holds 608x542 pixels with the first 456 lines being usable.
+Contents can be decoded to PNG using [Tools/xfb-to-png.py](../Tools/xfb-to-png.py).
+
+* Arguments: None
+* Returns: EFB data string (659072 bytes)

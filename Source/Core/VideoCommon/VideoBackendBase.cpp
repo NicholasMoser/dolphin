@@ -290,6 +290,16 @@ void VideoBackendBase::DoState(PointerWrap& p)
   Fifo::GpuMaySleep();
 }
 
+std::vector<u8> VideoBackendBase::DumpEFB()
+{
+  std::vector<u8> data;
+  AsyncRequests::Event ev = {};
+  ev.efb_dump.data = &data;
+  ev.type = AsyncRequests::Event::DUMP_EFB;
+  AsyncRequests::GetInstance()->PushEvent(ev, true);
+  return data;
+}
+
 void VideoBackendBase::InitializeShared()
 {
   memset(&g_main_cp_state, 0, sizeof(g_main_cp_state));

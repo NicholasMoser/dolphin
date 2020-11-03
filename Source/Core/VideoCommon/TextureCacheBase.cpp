@@ -5,6 +5,7 @@
 #include "VideoCommon/TextureCacheBase.h"
 
 #include <algorithm>
+#include <cassert>
 #include <cmath>
 #include <cstring>
 #include <memory>
@@ -2335,6 +2336,26 @@ void TextureCacheBase::CopyRenderTargetToTexture(
     entry->SetHashes(hash, hash);
     textures_by_address.emplace(dstAddr, entry);
   }
+}
+
+std::vector<u8> TextureCacheBase::DumpEFB()
+{
+  std::unique_ptr<AbstractStagingTexture> staging_texture = GetEFBCopyStagingTexture();
+  if (!staging_texture)
+    return {};
+
+  static constexpr CopyFilterCoefficients::Values filter_coefficients = {{7, 7, 12, 12, 12, 7, 7}};
+  EFBCopyFilterCoefficients coefficients = GetRAMCopyFilterCoefficients(filter_coefficients);
+  PEControl::PixelFormat srcFormat = bpmem.zcontrol.pixel_format;
+  EFBCopyParams format(srcFormat, EFBCopyFormat::XFB, false, false, true);
+  MathUtil::Rectangle<int> srcRect(0, 0, 608, 456);
+  float y_scale = 1.0f;
+  CopyEFB(staging_texture.get(), format, 608, 1216, 542, 1216, srcRect, false, true, y_scale, 1.0f,
+          true, true, coefficients);
+  constexpr size_t framebuffer_length = 1216 * 542;
+  std::vector<u8> out(framebuffer_length);
+  WriteEFBCopyToRAM(out.data(), 1216 / sizeof(u32), 542, 1216, std::move(staging_texture));
+  return out;
 }
 
 void TextureCacheBase::FlushEFBCopies()
