@@ -185,6 +185,7 @@
     <ClCompile Include="NetPlayClient.cpp" />
     <ClCompile Include="NetPlayServer.cpp" />
     <ClCompile Include="PatchEngine.cpp" />
+    <ClCompile Include="ScriptEngine.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="SysConf.cpp" />
     <ClCompile Include="TitleDatabase.cpp" />
@@ -628,6 +629,9 @@
     <ClCompile Include="PowerPC\PPCTables.cpp">
       <Filter>PowerPC</Filter>
     </ClCompile>
+    <ClCompile Include="PowerPC\ScriptHooks.cpp">
+      <Filter>PowerPC</Filter>
+    </ClCompile>
     <ClCompile Include="PowerPC\JitCommon\JitAsmCommon.cpp">
       <Filter>PowerPC\JitCommon</Filter>
     </ClCompile>
@@ -1020,6 +1024,7 @@
     <ClInclude Include="NetPlayProto.h" />
     <ClInclude Include="NetPlayServer.h" />
     <ClInclude Include="PatchEngine.h" />
+    <ClInclude Include="ScriptEngine.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="SysConf.h" />
     <ClInclude Include="Titles.h" />
@@ -1432,6 +1437,9 @@
       <Filter>PowerPC</Filter>
     </ClInclude>
     <ClInclude Include="PowerPC\PPCTables.h">
+      <Filter>PowerPC</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerPC\ScriptHooks.h">
       <Filter>PowerPC</Filter>
     </ClInclude>
     <ClInclude Include="PowerPC\Profiler.h">
