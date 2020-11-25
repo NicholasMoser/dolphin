@@ -365,10 +365,16 @@
     <ClCompile Include="PowerPC\PPCCache.cpp" />
     <ClCompile Include="PowerPC\PPCSymbolDB.cpp" />
     <ClCompile Include="PowerPC\PPCTables.cpp" />
+    <ClCompile Include="PowerPC\ScriptHooks.cpp">
+      <ExcludedFromBuild Condition="'$(Platform)'!='x64' OR '$(UseLuaScripts)'!='true'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="PowerPC\SignatureDB\CSVSignatureDB.cpp" />
     <ClCompile Include="PowerPC\SignatureDB\DSYSignatureDB.cpp" />
     <ClCompile Include="PowerPC\SignatureDB\MEGASignatureDB.cpp" />
     <ClCompile Include="PowerPC\SignatureDB\SignatureDB.cpp" />
+    <ClCompile Include="ScriptEngine.cpp">
+      <ExcludedFromBuild Condition="'$(Platform)'!='x64' OR '$(UseLuaScripts)'!='true'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="State.cpp" />
     <ClCompile Include="SysConf.cpp" />
     <ClCompile Include="TitleDatabase.cpp" />
@@ -662,6 +668,9 @@
     <ClInclude Include="PowerPC\JitCommon\JitAsmCommon.h" />
     <ClInclude Include="PowerPC\JitCommon\JitBase.h" />
     <ClInclude Include="PowerPC\JitCommon\JitCache.h" />
+    <ClInclude Include="PowerPC\ScriptHooks.h">
+      <ExcludedFromBuild Condition="'$(Platform)'!='x64' OR '$(UseLuaScripts)'!='true'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="PowerPC\SignatureDB\CSVSignatureDB.h" />
     <ClInclude Include="PowerPC\SignatureDB\DSYSignatureDB.h" />
     <ClInclude Include="PowerPC\SignatureDB\MEGASignatureDB.h" />
@@ -674,6 +683,9 @@
     <ClInclude Include="PowerPC\PPCSymbolDB.h" />
     <ClInclude Include="PowerPC\PPCTables.h" />
     <ClInclude Include="PowerPC\Profiler.h" />
+    <ClInclude Include="ScriptEngine.h">
+      <ExcludedFromBuild Condition="'$(Platform)'!='x64' OR '$(UseLuaScripts)'!='true'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="State.h" />
     <ClInclude Include="SyncIdentifier.h" />
     <ClInclude Include="SysConf.h" />

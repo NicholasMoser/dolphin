@@ -7,6 +7,7 @@
     <TargetName Condition="'$(ConfigurationType)'=='Application'">$(ProjectName)$(TargetSuffix)</TargetName>
     <!--Set link /INCREMENTAL:NO to remove some entropy from builds (assists with /Brepro)-->
     <LinkIncremental>false</LinkIncremental>
+    <UseLuaScripts>true</UseLuaScripts>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <!--ClCompile Base-->
@@ -34,6 +35,7 @@
       <AdditionalIncludeDirectories>$(ExternalsDir)liblzma\api;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories>$(ExternalsDir)libpng;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories>$(ExternalsDir)libusb\libusb;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Platform)'=='x64' AND '$(UseLuaScripts)'=='true'">$(ExternalsDir)lua\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories>$(ExternalsDir)LZO;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories>$(ExternalsDir)miniupnpc\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories>$(ExternalsDir)minizip;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -69,6 +71,7 @@
       <PreprocessorDefinitions Condition="'$(Platform)'=='x64'">_ARCH_64=1;_M_X86=1;_M_X86_64=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Platform)'=='ARM64'">_ARCH_64=1;_M_ARM_64=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PreprocessorDefinitions Condition="'$(Platform)'=='x64'">HAVE_FFMPEG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Platform)'=='x64' AND '$(UseLuaScripts)'=='true'">USE_LUA_SCRIPTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <!--
       Make sure we include a clean version of windows.h.
       -->
@@ -118,6 +121,8 @@
       4946  Reinterpret cast between related types
       -->
       <AdditionalOptions>/w44263 /w44265 /w44946 %(AdditionalOptions)</AdditionalOptions>
+      <!-- Suppress warning C4267 since it is treated as an error -->
+      <AdditionalOptions>/Wv:12 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalOptions>/Brepro %(AdditionalOptions)</AdditionalOptions>
       <!--
         A (currently) hidden switch, like /Brepro, furthermore enabling warnings about non-deterministic code.

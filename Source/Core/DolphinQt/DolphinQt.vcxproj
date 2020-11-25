@@ -37,7 +37,9 @@
     <Link>
       <AdditionalDependencies>avrt.lib;iphlpapi.lib;winmm.lib;setupapi.lib;rpcrt4.lib;comctl32.lib;Shlwapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalDependencies Condition="'$(Platform)'=='x64'">opengl32.lib;avcodec.lib;avformat.lib;avutil.lib;swresample.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies Condition="'$(Platform)'=='x64' AND '$(UseLuaScripts)'=='true'">lua53.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories Condition="'$(Platform)'=='x64'">$(ExternalsDir)ffmpeg\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(Platform)'=='x64' AND '$(UseLuaScripts)'=='true'">$(ExternalsDir)lua\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Manifest>
       <AdditionalManifestFiles>DolphinQt.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
@@ -104,6 +106,9 @@
     <ClCompile Include="Config\NewPatchDialog.cpp" />
     <ClCompile Include="Config\PatchesWidget.cpp" />
     <ClCompile Include="Config\PropertiesDialog.cpp" />
+    <ClCompile Include="Config\ScriptsWidget.cpp">
+      <ExcludedFromBuild Condition="'$(Platform)'!='x64' OR '$(UseLuaScripts)'!='true'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Config\SettingsWindow.cpp" />
     <ClCompile Include="Config\VerifyWidget.cpp" />
     <ClCompile Include="ConvertDialog.cpp" />
@@ -261,6 +266,9 @@
     <QtMoc Include="Config\Mapping\WiimoteEmuMotionControl.h" />
     <QtMoc Include="Config\Mapping\WiimoteEmuMotionControlIMU.h" />
     <QtMoc Include="Config\PropertiesDialog.h" />
+    <QtMoc Include="Config\ScriptsWidget.h">
+      <ExcludedFromBuild Condition="'$(Platform)'!='x64' OR '$(UseLuaScripts)'!='true'">true</ExcludedFromBuild>
+    </QtMoc>
     <QtMoc Include="Config\SettingsWindow.h" />
     <QtMoc Include="Config\VerifyWidget.h" />
     <QtMoc Include="ConvertDialog.h" />

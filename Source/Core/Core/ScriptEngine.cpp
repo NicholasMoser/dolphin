@@ -13,7 +13,7 @@
 #include <vector>
 
 #include <cassert>
-#include <lua5.3/lua.hpp>
+#include "lua.hpp"
 
 #include "Common/Assert.h"
 #include "Common/IniFile.h"
