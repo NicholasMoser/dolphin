@@ -5,14 +5,33 @@ Dolphin ships support for Lua 5.3 scripts that run embedded with the emulator.
 *Caution:* Never run untrusted scripts or scripts you do not understand yourself!
 Scripts will have access to your system like any other program, including the ability to do nasty things.
 
-**Requirements**
+## Requirements
+
+### Linux/OSX
 
 Script support is disabled by default, and has to be enabled via CMake flag `-DLUA_SCRIPTS=true`.
 
-Scripting support requires Lua sources while compiling and the Lua 5.3 dynamic library at runtime.
+It also requires Lua sources while compiling and the Lua 5.3 dynamic library at runtime.
 Debian provides both with the `liblua5.3-dev` and `lua5.3` packages.
 
-**Usage**
+### Windows
+
+Script support is disabled by default, and has to be enabled through a few different steps.
+
+First, script support requires the Windows library for Lua 5.3. Go to the [Lua Binaries page](http://luabinaries.sourceforge.net/)
+and select the latest release of 5.3. Select **Windows Libraries**, then select **Static**, and download the latest Win64 release
+(e.g. `lua-5.3.5_Win64_vc16_lib`).
+
+Unzip the Lua zip file to the `Externals` directory and rename it `lua`. Then create a new directory in the `lua` directory
+named `lib`. Move `lua53.lib` into the `lib` directory. Your `lua` folder should now have the following two files in the
+following directory structure:
+
+- Externals/lua/include/lua.hpp
+- Externals/lua/lib/lua53.lib
+
+Last, open `Source/VSProps/Base.props` and change the XML element `UseLuaScripts` to `true`.
+
+## Usage
 
 Scripts are defined in game properties and are run just before emulation starts.
 Any Lua code blocks emulator progression.
