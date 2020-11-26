@@ -7,7 +7,7 @@
     <TargetName Condition="'$(ConfigurationType)'=='Application'">$(ProjectName)$(TargetSuffix)</TargetName>
     <!--Set link /INCREMENTAL:NO to remove some entropy from builds (assists with /Brepro)-->
     <LinkIncremental>false</LinkIncremental>
-    <UseLuaScripts>true</UseLuaScripts>
+    <UseLuaScripts>false</UseLuaScripts>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <!--ClCompile Base-->
